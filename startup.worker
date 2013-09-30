@@ -1,0 +1,8 @@
+runtime "python"
+name "startup"
+full_remote_build true
+exec "pyworker.py"
+
+pip "pymongo"
+pip "requests"
+pip "iron-mq"
