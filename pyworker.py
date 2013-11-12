@@ -1,30 +1,38 @@
 import pymongo
 import requests
-from iron_mq import *
-client = pymongo.MongoClient('mercury.ranman.org')
+from iron_mq import IronMQ
+
+# connect to mongo and choose a database
+client = pymongo.MongoClient('mongodb.random.com')
 client.admin.authenticate('', '')
 db = client.angellist
+
+# connect to ironmq and choose a queue
 ironmq = IronMQ(project_id="", token="")
 queue = ironmq.queue("requests")
-
-reqs = []
+url = 'http://api.angel.co/1/startups/{0}'
+#
+results = []
 i = 0
 max_reqs = 1000
 while True:
-    q = queue.get()['messages'][0]
-    r = requests.get('http://api.angel.co/1/startups/{0}'.format(q['body'])).json()
+    message = queue.get()['messages'][0] # grab the "id" to use
+    r = requests.get(url.format(message['body'])).json()
     if not r.get('error'):
-        reqs.append(r)
-        queue.delete(q['id'])
-        print q['body']
+        results.append(r)
+        # remove from queue since it was successful
+        queue.delete(message['id'])
+        print(message['body'])
     elif r.get('error') == "over_limit":
-        print i
+        # if we go over our limit then stop trying to get more
+        print(i)
         break
     if r.get('error'):
-        queue.delete(q['id'])
+        # if there is another kind of error then just forget about it
+        queue.delete(message['id'])
     elif i > max_reqs:
         break
     i += 1
 
-if len(reqs) > 0:
-    db.startups.insert(reqs)
+if len(results) > 0:
+    db.startups.insert(results)
