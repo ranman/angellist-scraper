@@ -1,7 +1,7 @@
 import pymongo
 import requests
 from iron_mq import *
-client = pymongo.MongoClient('mercury.ranman.org', )
+client = pymongo.MongoClient('mercury.ranman.org')
 client.admin.authenticate('', '')
 db = client.angellist
 ironmq = IronMQ(project_id="", token="")
