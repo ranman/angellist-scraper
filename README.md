@@ -1,6 +1,6 @@
 ## Synopsis
 
-grab all the data from angellist and hope they don't sue me.
+Put the Angellist startups into MongoDB using a Iron.io queue and python.
 
 ## Code Example
 
@@ -8,7 +8,7 @@ nope.
 
 ## Motivation
 
-I'm not sure... Sometimes I decide to program things
+Sometimes Randall programs things and I try to fix them.
 
 ## Installation
 
