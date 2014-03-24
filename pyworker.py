@@ -1,14 +1,23 @@
 import pymongo
 import requests
 from iron_mq import IronMQ
+import os
 
+mongo_url = os.getenv("MONGO_URL")
+mongo_user = os.getenv("MONGO_USER")
+mongo_password = os.getenv("MONGO_PASSWORD")
+
+project_id = os.getenv("IRON_PROJECT_ID")
+token = os.getenv("IRON_TOKEN")
+
+print token
 # connect to mongo and choose a database
-client = pymongo.MongoClient('mongodb.random.com')
-client.admin.authenticate('', '')
+client = pymongo.MongoClient(mongo_url)
+client.admin.authenticate(mongo_user, mongo_password)
 db = client.angellist
 
 # connect to ironmq and choose a queue
-ironmq = IronMQ(project_id="", token="")
+ironmq = IronMQ(project_id=project_id, token=token)
 queue = ironmq.queue("requests")
 url = 'http://api.angel.co/1/startups/{0}'
 #

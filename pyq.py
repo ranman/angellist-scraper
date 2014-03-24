@@ -1,5 +1,11 @@
 from iron_mq import IronMQ
-ironmq = IronMQ(project_id="", token="")
+import os
+
+project_id = os.getenv("IRON_PROJECT_ID")
+token = os.getenv("IRON_TOKEN")
+
+
+ironmq = IronMQ(project_id=project_id, token=token)
 queue = ironmq.queue("requests")
 
 # Warning to all... this is probably the worst possible way to

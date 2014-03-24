@@ -12,19 +12,20 @@ I'm not sure... Sometimes I decide to program things
 
 ## Installation
 
-Change these lines in `pyworker.py`:
+Set the follow environment variables
 
-```python
-client = pymongo.MongoClient('mongodb.random.com')
-client.admin.authenticate('', '')
+* MONGO_URL- url to your mongoDB instance
+* MONGO_USER - user for mongoDB instance
+* MONGO_PASSWORD - password for above user
+* IRON_PROJECT_ID- IRON_MQ project ID
+* IRON_TOKEN - IRON_MQ project token
+
+Install the python environment
 ```
-and these in `pyq.py`:
-
-```python
-ironmq = IronMQ(project_id="", token="")
-queue = ironmq.queue("requests")
+virtualenv venv
+. venv/bin/activate
+pip install -r requirements.txt
 ```
-
 Then do this:
 
 ```shell
