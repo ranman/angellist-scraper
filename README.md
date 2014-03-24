@@ -1,6 +1,6 @@
 ## Synopsis
 
-grab all the data from angellist and home they don't sue me.
+grab all the data from angellist and hope they don't sue me.
 
 ## Code Example
 
