@@ -17,6 +17,7 @@ Set the follow environment variables
 * MONGO_URL- url to your mongoDB instance
 * MONGO_USER - user for mongoDB instance
 * MONGO_PASSWORD - password for above user
+* SCHEMA_NAME - name of MongoDB schema
 * IRON_PROJECT_ID- IRON_MQ project ID
 * IRON_TOKEN - IRON_MQ project token
 

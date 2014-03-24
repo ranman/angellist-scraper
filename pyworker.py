@@ -6,14 +6,14 @@ import os
 mongo_url = os.getenv("MONGO_URL")
 mongo_user = os.getenv("MONGO_USER")
 mongo_password = os.getenv("MONGO_PASSWORD")
+schema_name = os.getenv("SCHEMA_NAME")
 
 project_id = os.getenv("IRON_PROJECT_ID")
 token = os.getenv("IRON_TOKEN")
 
-print token
 # connect to mongo and choose a database
 client = pymongo.MongoClient(mongo_url)
-client.admin.authenticate(mongo_user, mongo_password)
+client.the_database.authenticate(mongo_user, mongo_password, source=schema_name)
 db = client.angellist
 
 # connect to ironmq and choose a queue
